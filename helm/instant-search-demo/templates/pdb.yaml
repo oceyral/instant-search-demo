@@ -1,0 +1,12 @@
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "instant-search-demo.fullname" . }}
+  labels:
+    {{- include "instant-search-demo.labels" . | nindent 4 }}
+spec:
+  minAvailable: {{ .Values.minAvailable }}
+  selector:
+    matchLabels:
+      {{- include "instant-search-demo.selectorLabels" . | nindent 6 }}

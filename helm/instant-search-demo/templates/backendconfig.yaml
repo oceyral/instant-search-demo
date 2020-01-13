@@ -1,0 +1,14 @@
+{{- if .Values.gcpBackendConfig.enabled -}}
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: {{ include "instant-search-demo.fullname" . }}
+  labels:
+    {{- include "instant-search-demo.labels" . | nindent 4 }}
+spec:
+  timeoutSec: {{ .Values.gcpBackendConfig.timeoutSec  }}
+  # connectionDraining:
+  #   drainingTimeoutSec: "{{ .Values.gcpBackendConfig.drainingTimeoutSec }}"
+  sessionAffinity:
+    affinityType: "{{ .Values.gcpBackendConfig.affinityType }}"
+{{- end }}
